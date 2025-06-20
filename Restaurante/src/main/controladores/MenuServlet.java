@@ -18,6 +18,6 @@ public class MenuServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Plato> platos = menuDAO.listarPlatos();
         request.setAttribute("platos", platos);
-        request.getRequestDispatcher("webapp/jsp/menu.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/menu.jsp").forward(request, response);
     }
 }
