@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Usuario usuario = usuarioDAO.validarUsuario(username, password);
+        Usuario usuario = usuarioDAO.login(username, password);
 
         if (usuario != null) {
             HttpSession session = request.getSession();

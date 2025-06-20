@@ -18,7 +18,7 @@ public class ReservaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Reserva> reservas = reservaDao.listarReservas();
+        List<Reserva> reservas = reservaDao.obtenerReservas();
         request.setAttribute("reservas", reservas);
         request.getRequestDispatcher("jsp/reservas.jsp").forward(request, response);
     }
@@ -45,7 +45,7 @@ public class ReservaServlet extends HttpServlet {
         String estado = request.getParameter("estado");
 
         Reserva nuevaReserva = new Reserva(nombreCliente, fecha, hora, numeroMesa, estado);
-        boolean resultado = reservaDao.insertarReserva(nuevaReserva);
+        boolean resultado = reservaDao.crearReserva(nuevaReserva);
 
         if (resultado) {
             response.sendRedirect("reservas");

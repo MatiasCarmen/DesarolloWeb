@@ -1,50 +1,46 @@
 package main.dao;
 
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.StoredProcedureQuery;
 import main.modelo.Usuario;
-import main.util.BDConnection;
-import java.sql.*;
+import main.util.JPAUtil;
+
+import jakarta.persistence.EntityManager;
 
 public class UsuarioDAO {
 
-    // ✅ Validar usuario en la BD
-    public Usuario validarUsuario(String username, String password) {
-        if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
-            return null; // Evita errores si los valores están vacíos
+    public Usuario login(String username, String password) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            StoredProcedureQuery query = em.createNamedStoredProcedureQuery("Usuario.login");
+            query.setParameter("p_username", username);
+            query.setParameter("p_password", password);
+            return (Usuario) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
         }
-
-        String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
-        try (Connection conn = BDConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new Usuario(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("rol"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
-    // ✅ Insertar nuevo usuario en la BD
-    public boolean insertarUsuario(String username, String password, String rol) {
-        if (username == null || password == null || rol == null || username.isEmpty() || password.isEmpty() || rol.isEmpty()) {
-            return false; // Evita insertar datos vacíos
-        }
-
-        String sql = "INSERT INTO usuarios (username, password, rol) VALUES (?, ?, ?)";
-        try (Connection conn = BDConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            stmt.setString(3, rol);
-            int filasAfectadas = stmt.executeUpdate();
-            return filasAfectadas > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public boolean crearUsuario(String username, String password, String rol) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Usuario u = new Usuario();
+            u.setUsername(username);
+            u.setPassword(password);
+            u.setRol(rol);
+            em.persist(u);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
             return false;
+        } finally {
+            em.close();
         }
     }
 }

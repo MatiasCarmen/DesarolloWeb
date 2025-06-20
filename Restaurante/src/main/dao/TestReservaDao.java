@@ -11,11 +11,11 @@ public class TestReservaDao {
 
         // PRUEBA DE INSERCIÓN
         Reserva nuevaReserva = new Reserva("Carlos Pérez", Date.valueOf("2025-05-25"), Time.valueOf("19:30:00"), 5, "Pendiente");
-        boolean resultadoInsercion = reservaDAO.insertarReserva(nuevaReserva);
+        boolean resultadoInsercion = reservaDAO.crearReserva(nuevaReserva);
         System.out.println("¿Reserva insertada?: " + resultadoInsercion);
 
         // PRUEBA DE LISTADO
-        List<Reserva> reservas = reservaDAO.listarReservas();
+        List<Reserva> reservas = reservaDAO.obtenerReservas();
         for (Reserva reserva : reservas) {
             System.out.println("Reserva: " + reserva.getId() + " - " +
                     reserva.getNombreCliente() + " - " +
