@@ -1,0 +1,102 @@
+body {
+    background: linear-gradient(135deg, #ece9f7 0%, #f9f6f0 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    transition: background 0.5s; /* Suavidad al cambiar */
+}
+
+section.reserva {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 24px 0 rgba(80,60,143,0.09); /* Sombra suave */
+    border-radius: 1.5rem;
+}
+
+.table thead th {
+    font-size: 1.13rem;
+    letter-spacing: 0.8px;
+    background-color: #f8f7fb;
+    color: #6236ff;
+    border-top: none;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f5f3fa;
+}
+.table-hover > tbody > tr:hover {
+    background: #ebe6ff;
+    cursor: pointer;
+}
+
+.card {
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 12px 0 rgba(98,54,255,0.07);
+    border: none;
+}
+
+.card .card-title i {
+    color: #6236ff;
+}
+
+footer {
+    letter-spacing: 1px;
+    font-size: 1.09rem;
+    background: linear-gradient(90deg,#6da8ff 0,#5a47d4 100%);
+    box-shadow: 0 -2px 10px rgba(80,60,143,0.07);
+}
+
+/* Inputs y selects modernos */
+.form-control, .form-select {
+    border-radius: 0.75rem;
+    border-color: #c2bff5;
+    transition: border 0.2s;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #6236ff;
+    box-shadow: 0 0 0 2px #dcd6fa;
+    outline: none;
+}
+
+.btn-success {
+    background: linear-gradient(90deg, #6592fd 0, #41e196 100%);
+    border: none;
+    transition: box-shadow 0.15s;
+    box-shadow: 0 2px 10px #cdefff5a;
+}
+.btn-success:hover, .btn-success:focus {
+    box-shadow: 0 4px 20px 0 #4ee4aa60;
+    background: linear-gradient(90deg, #5a47d4 0, #41e196 100%);
+}
+
+/* Badge personalizados para estado reserva */
+.badge.bg-success {
+    background: linear-gradient(90deg, #07ec64 0, #2cdb8a 100%) !important;
+}
+.badge.bg-danger {
+    background: linear-gradient(90deg, #fd5f5f 0, #ffb493 100%) !important;
+}
+.badge.bg-warning.text-dark {
+    background: linear-gradient(90deg, #fffbb4 0, #ffe17a 100%) !important;
+    color: #8a7510 !important;
+}
+
+/* Íconos destacados */
+.bi {
+    vertical-align: -.15em;
+}
+
+@media (max-width: 767px) {
+    .display-3 {
+        font-size: 2.2rem;
+    }
+    section.reserva {
+        padding: 1rem 0.5rem !important;
+        border-radius: 1rem;
+    }
+    .card {
+        border-radius: 1rem;
+    }
+    .table thead th, .table {
+        font-size: 0.98rem;
+    }
+}
