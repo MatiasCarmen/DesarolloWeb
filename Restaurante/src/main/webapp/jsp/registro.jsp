@@ -19,8 +19,17 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <h2 class="text-center">Registrar Nuevo Usuario</h2>
-            <% if (request.getParameter("error") != null) { %>
-            <div class="alert alert-danger">Error al registrar usuario. Inténtalo nuevamente.</div>
+            <% String err = request.getParameter("error");
+               if (err != null) {
+                   String msg;
+                   switch(err) {
+                       case "dni": msg = "El DNI ya está registrado."; break;
+                       case "telefono": msg = "El teléfono ya está registrado."; break;
+                       case "correo": msg = "El correo ya está registrado."; break;
+                       default: msg = "Error al registrar usuario. Inténtalo nuevamente.";
+                   }
+            %>
+            <div class="alert alert-danger"><%= msg %></div>
             <% } %>
             <% if (request.getParameter("success") != null) { %>
             <div class="alert alert-success">Usuario registrado exitosamente.</div>
@@ -33,6 +42,18 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" name="dni" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" name="telefono" required>
+                </div>
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo</label>
+                    <input type="email" class="form-control" name="correo" required>
                 </div>
                 <div class="mb-3">
                     <label for="rol" class="form-label">Rol</label>
