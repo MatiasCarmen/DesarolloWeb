@@ -20,7 +20,7 @@ public class RegistroServlet extends HttpServlet {
         String password = request.getParameter("password");
         String rol = request.getParameter("rol");
 
-        boolean registrado = usuarioDAO.insertarUsuario(username, password, rol);
+        boolean registrado = usuarioDAO.crearUsuario(username, password, rol);
 
         if (registrado) {
             response.sendRedirect("registro.jsp?success=true");
