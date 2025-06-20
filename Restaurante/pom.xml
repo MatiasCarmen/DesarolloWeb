@@ -9,11 +9,11 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
-    <!-- Dependencia para pruebas unitarias -->
+    <!-- Dependencias para JUnit 5 -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
     <!-- API de Servlets para Tomcat 10+ -->
@@ -61,6 +61,12 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.3.2</version>
+      </plugin>
+      <!-- Plugin para ejecutar pruebas con JUnit 5 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
       </plugin>
     </plugins>
   </build>
