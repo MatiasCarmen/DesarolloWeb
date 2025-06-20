@@ -16,7 +16,7 @@
     <title>Menú - Sabores del Alma</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/main/webapp/css/estilos.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/estilos.css">
 </head>
 <body class="bg-light">
 <div class="container mt-4">
@@ -54,7 +54,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card text-center p-3 shadow-sm">
                     <!-- Si la imagen no existe, usa una imagen por defecto -->
-                    <img src="/img/<%= plato.getImagen() != null ? plato.getImagen() : "placeholder.jpg" %>"
+                    <img src="<%= request.getContextPath() %>/img/<%= plato.getImagen() != null ? plato.getImagen() : "placeholder.jpg" %>"
                          alt="<%= plato.getNombre() %>" class="img-fluid rounded">
                     <h3><%= plato.getNombre() %></h3>
                     <p><%= plato.getDescripcion() %></p>

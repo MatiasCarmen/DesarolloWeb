@@ -6,7 +6,7 @@
     <title>Sabores del Alma</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/main/webapp/css/estilos.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/estilos.css">
 
 </head>
 <body class="bg-light">
@@ -35,7 +35,7 @@
     <section class="bienvenida text-center">
         <h2>Bienvenidos a Sabores del Alma</h2>
         <p class="lead">Una experiencia culinaria que mezcla la tradición piurana con lo mejor del Mediterráneo.</p>
-        <img src="img/restaurante.webp" class="img-fluid rounded shadow" alt="Restaurante Sabores del Alma">
+        <img src="<%= request.getContextPath() %>/img/restaurante.webp" class="img-fluid rounded shadow" alt="Restaurante Sabores del Alma">
     </section>
 
     <footer class="text-center mt-4">
