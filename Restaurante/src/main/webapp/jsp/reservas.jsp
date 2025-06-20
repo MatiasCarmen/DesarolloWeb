@@ -11,8 +11,8 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    <script src="../scripts.js" defer></script>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/main/webapp/css/estilos.css">
+    <script src="<%= request.getContextPath() %>/js/scripts.js" defer></script>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/estilos.css">
 </head>
 <body class="bg-body-secondary">
 <div class="container mt-4 mb-5">
