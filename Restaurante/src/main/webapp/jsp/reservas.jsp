@@ -29,10 +29,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="../menu.jsp"><i class="bi bi-journal"></i> Menú</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.jsp"><i class="bi bi-journal"></i> Menú</a></li>
                         <li class="nav-item"><a class="nav-link active" href="reservas.jsp"><i class="bi bi-calendar-check"></i> Reservas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../pedidos.jsp"><i class="bi bi-basket2"></i> Pedidos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../login.jsp"><i class="bi bi-gear-fill"></i> Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pedidos.jsp"><i class="bi bi-basket2"></i> Pedidos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.jsp"><i class="bi bi-gear-fill"></i> Admin</a></li>
                     </ul>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                         <input type="time" class="form-control" name="hora" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label"><i class="bi bi-people-fill me-1"></i> Número de personas:</label>
+                        <label class="form-label"><i class="bi bi-people-fill me-1"></i> Número de mesa:</label>
                         <input type="number" min="1" class="form-control" name="numeroMesa" required>
                     </div>
                     <div class="col-md-4">
