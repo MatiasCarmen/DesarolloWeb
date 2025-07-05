@@ -26,23 +26,62 @@ public class ReservaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nombreCliente = request.getParameter("nombreCliente");
-        Date fecha = Date.valueOf(request.getParameter("fecha"));
+        String fechaStr = request.getParameter("fecha");
+        String numeroMesaStr = request.getParameter("numeroMesa");
+        String estado = request.getParameter("estado");
+
+        // Validaciones de entrada
+        if (nombreCliente == null || nombreCliente.trim().isEmpty()) {
+            response.sendRedirect("jsp/reservas.jsp?error=nombre_vacio");
+            return;
+        }
+
+        if (fechaStr == null || fechaStr.trim().isEmpty()) {
+            response.sendRedirect("jsp/reservas.jsp?error=fecha_vacia");
+            return;
+        }
+
+        Date fecha;
+        try {
+            fecha = Date.valueOf(fechaStr);
+        } catch (IllegalArgumentException e) {
+            response.sendRedirect("jsp/reservas.jsp?error=fecha_invalida");
+            return;
+        }
 
         // ✅ Validar el formato de `hora` antes de convertirlo a `Time`
         String horaStr = request.getParameter("hora");
         System.out.println("Hora recibida: " + horaStr);  // Depuración
 
         Time hora = null;
-        if (horaStr != null && horaStr.matches("\\d{2}:\\d{2}:\\d{2}")) {
+        if (horaStr != null && horaStr.matches("\\d{2}:\\d{2}(:\\d{2})?")) {
+            // Si el formato es HH:MM, agregar :00 para los segundos
+            if (horaStr.matches("\\d{2}:\\d{2}")) {
+                horaStr = horaStr + ":00";
+            }
             hora = Time.valueOf(horaStr);
         } else {
             System.out.println("Error: formato de hora incorrecto.");
-            response.sendRedirect("jsp/reserva.jsp?error=formato_hora");
+            response.sendRedirect("jsp/reservas.jsp?error=formato_hora");
             return;
         }
 
-        int numeroMesa = Integer.parseInt(request.getParameter("numeroMesa"));
-        String estado = request.getParameter("estado");
+        int numeroMesa;
+        try {
+            numeroMesa = Integer.parseInt(numeroMesaStr);
+            if (numeroMesa <= 0) {
+                response.sendRedirect("jsp/reservas.jsp?error=numero_mesa_invalido");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            response.sendRedirect("jsp/reservas.jsp?error=numero_mesa_invalido");
+            return;
+        }
+
+        if (estado == null || estado.trim().isEmpty()) {
+            response.sendRedirect("jsp/reservas.jsp?error=estado_vacio");
+            return;
+        }
 
         Reserva nuevaReserva = new Reserva(nombreCliente, fecha, hora, numeroMesa, estado);
         boolean resultado = reservaDao.crearReserva(nuevaReserva);

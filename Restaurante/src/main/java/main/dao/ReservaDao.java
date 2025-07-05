@@ -32,6 +32,7 @@ public class ReservaDao {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public List<Reserva> obtenerReservas() {
         EntityManager em = JPAUtil.getEntityManager();
         try {

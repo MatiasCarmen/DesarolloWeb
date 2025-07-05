@@ -29,10 +29,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="../menu.jsp"><i class="bi bi-journal"></i> Menú</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.jsp"><i class="bi bi-journal"></i> Menú</a></li>
                         <li class="nav-item"><a class="nav-link active" href="reservas.jsp"><i class="bi bi-calendar-check"></i> Reservas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../pedidos.jsp"><i class="bi bi-basket2"></i> Pedidos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../login.jsp"><i class="bi bi-gear-fill"></i> Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pedidos.jsp"><i class="bi bi-basket2"></i> Pedidos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.jsp"><i class="bi bi-gear-fill"></i> Admin</a></li>
                     </ul>
                 </div>
             </div>
@@ -45,6 +45,25 @@
         <% String mensajeExito = (String) request.getAttribute("mensajeExito"); %>
         <% if (mensajeExito != null) { %>
             <div class="alert alert-success text-center fw-bold"><%= mensajeExito %></div>
+        <% } %>
+        
+        <% String errorParam = request.getParameter("error"); %>
+        <% if (errorParam != null) { %>
+            <div class="alert alert-danger text-center fw-bold">
+                <%
+                    String mensajeError = "";
+                    switch (errorParam) {
+                        case "nombre_vacio": mensajeError = "El nombre del cliente es obligatorio."; break;
+                        case "fecha_vacia": mensajeError = "La fecha es obligatoria."; break;
+                        case "fecha_invalida": mensajeError = "Formato de fecha inválido."; break;
+                        case "formato_hora": mensajeError = "Formato de hora inválido."; break;
+                        case "numero_mesa_invalido": mensajeError = "El número de mesa debe ser un número positivo."; break;
+                        case "estado_vacio": mensajeError = "El estado es obligatorio."; break;
+                        default: mensajeError = "Error en los datos ingresados."; break;
+                    }
+                %>
+                <%= mensajeError %>
+            </div>
         <% } %>
 
         <!-- Tabla de Reservas -->
@@ -107,7 +126,7 @@
                         <input type="time" class="form-control" name="hora" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label"><i class="bi bi-people-fill me-1"></i> Número de personas:</label>
+                        <label class="form-label"><i class="bi bi-people-fill me-1"></i> Número de mesa:</label>
                         <input type="number" min="1" class="form-control" name="numeroMesa" required>
                     </div>
                     <div class="col-md-4">
