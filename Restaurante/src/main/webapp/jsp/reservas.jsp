@@ -46,6 +46,25 @@
         <% if (mensajeExito != null) { %>
             <div class="alert alert-success text-center fw-bold"><%= mensajeExito %></div>
         <% } %>
+        
+        <% String errorParam = request.getParameter("error"); %>
+        <% if (errorParam != null) { %>
+            <div class="alert alert-danger text-center fw-bold">
+                <%
+                    String mensajeError = "";
+                    switch (errorParam) {
+                        case "nombre_vacio": mensajeError = "El nombre del cliente es obligatorio."; break;
+                        case "fecha_vacia": mensajeError = "La fecha es obligatoria."; break;
+                        case "fecha_invalida": mensajeError = "Formato de fecha inválido."; break;
+                        case "formato_hora": mensajeError = "Formato de hora inválido."; break;
+                        case "numero_mesa_invalido": mensajeError = "El número de mesa debe ser un número positivo."; break;
+                        case "estado_vacio": mensajeError = "El estado es obligatorio."; break;
+                        default: mensajeError = "Error en los datos ingresados."; break;
+                    }
+                %>
+                <%= mensajeError %>
+            </div>
+        <% } %>
 
         <!-- Tabla de Reservas -->
         <div class="table-responsive">
